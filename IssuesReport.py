@@ -8,9 +8,9 @@ import pandas as pd
 
 #URL_DNAC=str(input("Please enter the URL of your DNA Center: "))#"sandboxdnac.cisco.com"
 URL_DNAC="sandboxdnac.cisco.com"
-temp=open("DNAC_Token.txt",'r')
-DNAC_TOKEN=temp.read()
-temp.close()
+
+DNAC_TOKEN=""#DNAC TOKEN
+
 
 h_dnac = {
   'content-type': 'application/json',
@@ -27,15 +27,15 @@ df=audit_logs_df.set_index("timestamp")
 msg=audit_logs_df[['timestamp','eventId','name','description']].to_string()
 
 url_webex = "https://webexapis.com/v1/messages"
-temp=open("Bot access token.txt",'r')
-WEBEX_ACCESS_TOKEN=temp.read()
-temp.close()
+
+WEBEX_ACCESS_TOKEN=""#WEBEX BOT ACCESS TOKEN
+
 h_webex = {
   'Content-Type': 'application/json',
   "Authorization": "Bearer " + WEBEX_ACCESS_TOKEN
 }
-#roomId="Y2lzY29zcGFyazovL3VzL1JPT00vNGZmMGQwMDAtZWJmYy0xMWViLWI0OWUtOGRhMjlkNWZiNDJi"#Group Space
-roomId="Y2lzY29zcGFyazovL3VzL1JPT00vM2I0ZDU0OTAtMjJjOC0xMWVjLThlNDYtOGI4NGIyMTU4ZGFh"#Direct Space
+
+roomId=""#ENTER YOUR ROOM ID
 message={"roomId":roomId,"text":msg}
 
 response_webex = requests.request("POST", url_webex, headers=h_webex, data=json.dumps(message))
